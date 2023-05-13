@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "StarWars";
+}
+
+@model IEnumerable<MoviesChallenge.Models.StarWarsModel>
+
+<div class="text-center">
+    <h1 class="display-4">Star Wars</h1>
+</div>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for characters" title="Type in a name">
+
+<table id="myTable" class="table table-bordered table-responsive table-hover"> 
+    <tr>
+        <th>Name</th>
+        <th>Birth Year</th>
+        <th>Eye Color</th>
+        <th>Gender</th>
+        <th>Hair Color</th>
+        <th>Height</th>
+        <th>Mass</th>
+        <th>Home World</th>
+        <th>URL</th>
+        <th>Created</th>
+        <th>Edited</th>
+    </tr>
+    @*Retrieving data from model to display in table*@
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.name</td>
+            <td>@d.birth_year</td>
+            <td>@d.eye_color</td>
+            <td>@d.gender</td>
+            <td>@d.hair_color</td>
+            <td>@d.height</td>
+            <td>@d.mass</td>
+            <td>@d.homeworld</td>
+            <td>@d.url</td>
+            <td>@d.created</td>
+            <td>@d.edited</td>
+        </tr>
+    }
+</table>
+
+@*Simple JS function to filter actor names*@
+<script>
+function myFunction() {
+  var input = document.getElementById("myInput");
+  var filter = input.value.toUpperCase();
+  var table = document.getElementById("myTable");
+  var tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) <= -1) {
+        tr[i].style.display = "none";
+      } else {
+        tr[i].style.display = "";
+      }
+    }       
+  }
+}
+</script>
